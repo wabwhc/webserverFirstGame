@@ -52,21 +52,29 @@ app.post('/rank', (req, res) => {
         }
         var sql = `insert into rank values ("${id}", ${score}, "${ms}")`
         conn.query(sql, (err, rows, field)=>{
-            if(err){
-                res.send(err)
-            }
         })
         var sql = 'select * from rank order by score desc';
         conn.query(sql, (err, rows, field) => {
-            res.send(rows);
+            res.render('rank', {rows: rows});
         })
     })
+})
+
+app.get('/rank', (req, res) => {
+    var sql = 'select * from rank order by score desc';
+        conn.query(sql, (err, rows, field) => {
+            res.render('rank', {rows: rows});
+        })
 })
 
 app.get('/game', (req, res) => {
     res.render('game');
 })
 
+app.get('/user/:id', (req, res) => {
+    var id = req.params.id
+    res.send(id)
+})
 app.listen(3000, (req, res) => {
     console.log("3000 Port connected");
 })
