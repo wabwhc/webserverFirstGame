@@ -47,16 +47,13 @@ app.post('/rank', (req, res) => {
                 conn.query(sql, [id], (err, rows, field) => {      
                 })
             }
+            var sql = `insert into rank values ("${id}", ${score}, "${ms}")`
+            conn.query(sql, (err, rows, field)=>{
+            })
         }else if(rows[0].password !== pw){
             res.redirect(307,'makerank');
         }
-        var sql = `insert into rank values ("${id}", ${score}, "${ms}")`
-        conn.query(sql, (err, rows, field)=>{
-        })
-        var sql = 'select * from rank order by score desc';
-        conn.query(sql, (err, rows, field) => {
-            res.render('rank', {rows: rows});
-        })
+        res.render('main');
     })
 })
 
@@ -73,7 +70,10 @@ app.get('/game', (req, res) => {
 
 app.get('/user/:id', (req, res) => {
     var id = req.params.id
-    res.send(id)
+    var sql = 'select id, best, low from user where id = ?'
+    conn.query(sql, [id], (err, rows, field) => {
+        res.send(rows)
+    })
 })
 app.listen(3000, (req, res) => {
     console.log("3000 Port connected");
