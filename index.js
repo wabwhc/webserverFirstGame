@@ -35,6 +35,9 @@ app.post('/rank', (req, res) => {
             var sql = `insert into user(id, password, best, low) values("${id}", "${pw}", ${score}, ${score})`
             conn.query(sql, (err, rows, field) => {
             })
+            var sql = `insert into rank values ("${id}", ${score}, "${ms}")`
+            conn.query(sql, (err, rows, field)=>{
+            })
 
         }else if(rows[0].password === pw){
             if(rows[0].best < score){
@@ -72,9 +75,10 @@ app.get('/user/:id', (req, res) => {
     var id = req.params.id
     var sql = 'select id, best, low from user where id = ?'
     conn.query(sql, [id], (err, rows, field) => {
-        res.send(rows)
+        res.send(`id:${rows[0].id}, 최고점수:${rows[0].best}, 최하점수:${rows[0].low}`);
     })
 })
-app.listen(3000, (req, res) => {
-    console.log("3000 Port connected");
+
+app.listen(8080, (req, res) => {
+    console.log("8080 Port connected");
 })

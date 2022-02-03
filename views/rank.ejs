@@ -8,7 +8,7 @@
 </head>
 <body>
     <% rows.forEach( (a) => { %>
-        <h3 onclick="location.href = '/user/<%= a.id %>'""> <%= a.id %> <%= a.score %> <%= a.comment %> </h3>
+        <h3 onclick="location.href = '/user/<%= a.id %>'""> ID: <%= a.id %> 점수: <%= a.score %> Comment: <%= a.comment %> </h3>
     <% }) %>
 </body>
 </html>
