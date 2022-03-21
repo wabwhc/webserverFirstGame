@@ -4,10 +4,10 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const conn = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'pmss951623',
-    database: 'game'
+    host: ,
+    user: ,
+    password: ,
+    database: ,
 })
 
 app.use('/public', express.static(path.join(__dirname, '/public')));
